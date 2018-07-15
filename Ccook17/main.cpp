@@ -6,16 +6,19 @@
 using namespace std;
 
 stack<double> subtracAndRest(int a,int b,stack<double> stck){
+    bool operand_missing = false;
     if(stck.size() < 2){
         cout << "Operand Missing\n";
-        break;
+        operand_missing = true;
     }
+    if(!operand_missing){
     a = stck.top();
     stck.pop();
     b = stck.top();
     stck.pop();
     cout << a + b << "\n";
     stck.push(a+b);
+    }
     return stck;
 }
 
@@ -40,11 +43,34 @@ int main()
                 subtracAndRest(a,b,stck);
                 break;
             case'*':
-
-                break;//carpa cuijen continuara...
-
+                if(stck.size() < 2){
+                    cout << "operand missingn/n";
+                    break;
+                }
+                a = stck.top();
+                stck.pop();
+                b = stck.top();
+                stck.pop();
+                cout << a*b << "/n";
+                stck.push(a*b);
+                break;
+            case '/':
+                if(stck.size() < 2){
+                    cout << "operand missingn/n";
+                    break;
+                }
+                a = stck.top();
+                stck.pop();
+                b = stck.top();
+                stck.pop();
+                cout << b/a << "/n";
+                stck.push(b/a);
+                break;
+            default:
+                stck.push(atof(s.c_str()));
+                break;
         }
-    }
+    }while(s != "q");
 
     return 0;
 }
